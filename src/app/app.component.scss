@@ -1,0 +1,9 @@
+.show{
+    display: block;
+}
+
+form.ng-submitted{
+    input.ng-invalid{
+        border: 1px solid red;
+    }
+}

@@ -1,0 +1,64 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold text-primary" href="#">PROPERTY MANAGEMENT</a>
+      <div class="float-right">
+        <button class="btn btn-primary" (click)="openModal()">Add Property</button>
+      </div>
+    </div>
+  </nav>
+  <div class="d-flex justify-content-center m-3">
+    <h3>Property List</h3>
+  </div>
+  <div class="mx-3">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Descripton</th>
+          <th scope="col">Size (in sqft)</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let property of properties?.records;let i = index">
+          <th scope="row">{{property?.fields.id}}</th>
+          <td>{{property?.fields.name}}</td>
+          <td>{{property?.fields.description}}</td>
+          <td>{{property?.fields.size}}</td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteProperty(property.id)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal" #modal tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Enter Property Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- <p>Modal body text goes here.</p> -->
+        <form action="post" [formGroup]="form" (ngSubmit)="addProperty(form.value)">
+          <label for="name">Name</label>
+          <input class="form-control" formLable="Name" type="text" formControlName="name">
+          <br>
+          <label for="description">Description</label>
+          <input class="form-control" type="text" formLable="Description" formControlName="description">
+          <br>
+          <label for="size">Size (in sqft)</label>
+          <input class="form-control" type="number" formLable="Size" formControlName="size">
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Close</button>
+            <button type="submit" class="btn btn-primary">Save Property</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
